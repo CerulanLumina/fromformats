@@ -1,0 +1,25 @@
+[package]
+name = "fromformats"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aes = { version = "0.8.4", optional = true }
+byteorder = { version = "1.5.0", optional = true }
+bytes = "1.6.0"
+cbc = { version = "0.1.2", optional = true }
+flate2 = { version = "1.0.28", optional = true }
+hex-literal = "0.4.1"
+thiserror = "1.0.58"
+zerocopy = { version = "0.7.32", optional = true }
+
+[features]
+default = ["regulation", "dcx"]
+regulation = ["dep:cbc", "dep:aes", "dcx", "cbc/alloc"]
+dcx = ["dep:byteorder", "dep:flate2", "dep:zerocopy", "zerocopy/derive"]
+
+
+[dev-dependencies]
+anyhow = "1.0.81"
